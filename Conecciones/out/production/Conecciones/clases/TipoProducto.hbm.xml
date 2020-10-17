@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="clases">
+    <class name="TipoProducto" table="TipoProducto">
+        <id name="idTipoProducto"
+            column="IdTipoProducto"
+            type="java.lang.Integer"
+            unsaved-value="null" >
+        </id>
+
+        <property name="descripcion" column="descripcion"/>
+        <bag name="Producto" table="Producto"
+             inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idProducto" not-null="true" />
+            </key>
+            <one-to-many class="Producto"/>
+        </bag>
+    </class>
+</hibernate-mapping>

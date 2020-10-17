@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="clases">
+  <class name="Producto" table="Producto">
+   <id name="idProducto"
+            column="idProducto"
+            type="java.lang.Integer"
+            unsaved-value="null" >
+            <generator class="native">
+            </generator>
+        </id>
+
+<property name="nombre" column="nombre"/>
+<property name="fechaIngreso" column="fechaIngreso" />
+    <bag name="HistorialProducto" table="Historial"
+         inverse="true" lazy="true" fetch="select">
+        <key>
+            <column name="idProducto" not-null="true" />
+        </key>
+        <one-to-many class="HistorialProducto"/>
+    </bag>
+      <bag name="EvidenciaFotografica" table="fotografias"
+           inverse="true" lazy="true" fetch="select">
+          <key>
+              <column name="idProducto" not-null="true" />
+          </key>
+          <one-to-many class="EvidenciaFotografica"/>
+      </bag>
+      <bag name="CalendarioRiego" table="CalendarioRiego"
+           inverse="true" lazy="true" fetch="select">
+          <key>
+              <column name="idProducto" not-null="true" />
+          </key>
+          <one-to-many class="CalendarioRiego"/>
+      </bag>
+  </class>
+</hibernate-mapping>
